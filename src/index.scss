@@ -1,4 +1,5 @@
 $color-gray: #cccccc;
+$max-layout-width: 1100px;
 
 body {
   font-family: 'Open Sans', sans-serif;
@@ -10,6 +11,10 @@ body {
 
 .main-section {
   display: flex;
+
+  @media (max-width: $max-layout-width) {
+    display: block;
+  }
 }
 
 .loader {
@@ -26,10 +31,29 @@ body {
   min-height: 100vh;
   border-right: 1px solid $color-gray;
 
+  @media (max-width: $max-layout-width) {
+    padding: 1em;
+    min-height: auto;
+    flex: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  }
+
+  .filter-container {
+    width: 33%;
+    min-width: 200px;
+    // padding: 0 2em;
+  }
+
   .filter-by-text {
     font-weight: bold;
-    font-size: 1.2em;
-    margin: 1em 0;
+    font-size: 1.1em;
+    margin: 2em 0 0.5em 0;
+
+    @media (max-width: $max-layout-width) {
+      margin: 0.5em 0;
+    }
   }
 
   .dropdown {
