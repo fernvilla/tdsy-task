@@ -107,6 +107,7 @@ const App = () => {
   const onLanguagesFilterChange = (comparator, filter) => {
     setSelectedLanguagesFilter(filter);
     filterItemsByLanguages(comparator, parseInt(filter));
+    setSelectedRegionFilter(null);
   };
 
   const filterItemsByRegion = filter => {
@@ -118,6 +119,7 @@ const App = () => {
   const onRegionFilterChange = filter => {
     setSelectedRegionFilter(filter);
     filterItemsByRegion(filter);
+    setSelectedLanguagesFilter(null);
   };
 
   const onCountrySelect = country => {
