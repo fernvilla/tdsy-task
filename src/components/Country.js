@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Country = props => {
-  const { name, flag, subregion, capital, population, languages } = props.data;
+const Country = ({ data, selectedCountry, onCountrySelect }) => {
+  const { name, flag, subregion, capital, population, languages, borders, alpha3Code } = data;
+  const notBordered = selectedCountry && selectedCountry !== alpha3Code && !borders.includes(selectedCountry);
 
   return (
     <div className="country-card-wrapper">
-      <div className="country-card">
+      <div className="country-card" style={notBordered ? { opacity: '0.3' } : {}} onClick={() => onCountrySelect(data)}>
         <img className="country-img" src={flag} alt={name} title={name} />
 
         <div className="card-info">
@@ -32,7 +33,13 @@ const Country = props => {
 };
 
 Country.propTypes = {
-  data: PropTypes.object.isRequired
+  data: PropTypes.object.isRequired,
+  onCountrySelect: PropTypes.func.isRequired,
+  selectedCountry: PropTypes.string
+};
+
+Country.defaultProps = {
+  selectedCountry: null
 };
 
 export default Country;

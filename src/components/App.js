@@ -18,6 +18,7 @@ const App = () => {
   const [selectedRegionFilter, setSelectedRegionFilter] = useState(null);
   const [selectedLanguagesFilter, setSelectedLanguagesFilter] = useState(null);
   const [availableSubregions, setAvailableSubregions] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState(null);
 
   useEffect(() => {
     const fetchCountries = async () => {
@@ -119,6 +120,11 @@ const App = () => {
     filterItemsByRegion(filter);
   };
 
+  const onCountrySelect = country => {
+    if (country.alpha3Code === selectedCountry) return setSelectedCountry(null);
+    setSelectedCountry(country.alpha3Code);
+  };
+
   if (!countriesFetched) return <div className="loader">Loading...</div>;
 
   return (
@@ -135,7 +141,12 @@ const App = () => {
 
       <div className="countries-container">
         {renderedCountries.map(country => (
-          <Country key={country.numericCode} data={country} />
+          <Country
+            key={country.numericCode}
+            data={country}
+            onCountrySelect={onCountrySelect}
+            selectedCountry={selectedCountry}
+          />
         ))}
       </div>
     </main>

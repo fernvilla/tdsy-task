@@ -137,6 +137,12 @@ body {
       overflow: hidden;
       border-radius: 5px;
       box-shadow: rgba(34, 36, 38, 0.15) 0px 1px 2px 0px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:hover {
+        margin-top: -2px;
+      }
 
       .country-img {
         max-width: 100%;
