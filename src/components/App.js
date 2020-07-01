@@ -11,7 +11,8 @@ import {
 } from '../constants';
 
 const App = () => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState([]); //Use to reset filter by coutries
+  const [renderedCountries, setRenderedCountries] = useState([]); //Use for filtering/sorting
   const [countriesFetched, setCountriesFetched] = useState(false);
   const [selectedSort, setSelectedSort] = useState(null);
   const [selectedRegionFilter, setSelectedRegionFilter] = useState(null);
@@ -29,6 +30,7 @@ const App = () => {
         console.log('countries', data);
 
         setCountries(data);
+        setRenderedCountries(data);
         mapSubregionsToArary(data);
         setCountriesFetched(true);
       } catch (error) {
@@ -56,7 +58,7 @@ const App = () => {
   const sortItems = sort => {
     if (sort === null) return;
 
-    const newCountries = countries.sort((a, b) => {
+    const newCountries = renderedCountries.sort((a, b) => {
       switch (sort) {
         case SORT_POPULATION_ASC:
           return a.population - b.population;
@@ -75,7 +77,7 @@ const App = () => {
       }
     });
 
-    setCountries(newCountries);
+    setRenderedCountries(newCountries);
   };
 
   const onSortChange = sort => {
@@ -98,7 +100,7 @@ const App = () => {
       return false;
     });
 
-    setCountries(newCountries);
+    setRenderedCountries(newCountries);
   };
 
   const onLanguagesFilterChange = (comparator, filter) => {
@@ -109,7 +111,7 @@ const App = () => {
   const filterItemsByRegion = filter => {
     const newCountries = countries.filter(country => country.subregion === filter);
 
-    setCountries(newCountries);
+    setRenderedCountries(newCountries);
   };
 
   const onRegionFilterChange = filter => {
@@ -132,7 +134,7 @@ const App = () => {
       />
 
       <div className="countries-container">
-        {countries.map(country => (
+        {renderedCountries.map(country => (
           <Country key={country.numericCode} data={country} />
         ))}
       </div>
