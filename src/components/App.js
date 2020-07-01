@@ -29,7 +29,7 @@ const App = () => {
   if (!countriesFetched) return <div>Loading...</div>;
 
   return (
-    <div>
+    <div className="countries-container">
       {countries.map(country => (
         <Country key={country.numericCode} data={country} />
       ))}

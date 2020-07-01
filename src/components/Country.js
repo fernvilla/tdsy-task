@@ -6,15 +6,28 @@ const Country = props => {
   const { name, flag, subregion, capital, population, languages } = props.data;
 
   return (
-    <div>
-      <div>Name: {name}</div>
-      <div>
-        <img src={flag} alt={name} title={name} height />
+    <div className="country-card-wrapper">
+      <div className="country-card">
+        <img className="country-img" src={flag} alt={name} title={name} height />
+
+        <div className="card-info">
+          <div>
+            <strong>Name:</strong> {name}
+          </div>
+          <div>
+            <strong>Subregion:</strong> {subregion}
+          </div>
+          <div>
+            <strong>Capital:</strong> {capital}
+          </div>
+          <div>
+            <strong>Total population:</strong> {population}
+          </div>
+          <div>
+            <strong>Languages:</strong> {languages.length}
+          </div>
+        </div>
       </div>
-      <div>Subregion: {subregion}</div>
-      <div>Capital: {capital}</div>
-      <div>Total population: {population}</div>
-      <div>Languages: {languages.length}</div>
     </div>
   );
 };

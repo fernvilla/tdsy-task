@@ -1,1 +1,50 @@
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14px;
+}
 
+.countries-container {
+  padding: 3em 1em;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-width: 1000px;
+  margin: auto;
+
+  .country-card-wrapper {
+    width: 33.33%;
+
+    @media (max-width: 480px) {
+      width: 100%;
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      width: 50%;
+    }
+
+    .country-card {
+      margin: 1em;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: rgba(34, 36, 38, 0.15) 0px 1px 2px 0px;
+
+      .country-img {
+        max-width: 100%;
+        display: block;
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+        border-bottom: 1px solid #cccccc;
+      }
+
+      .card-info {
+        padding: 1em;
+
+        & div {
+          margin-bottom: 0.5em;
+        }
+      }
+    }
+  }
+}
