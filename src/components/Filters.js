@@ -1,14 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { SORT_NAME_ASC, SORT_NAME_DESC, SORT_POPULATION_ASC, SORT_POPULATION_DESC } from '../constants';
+import {
+  SORT_NAME_ASC,
+  SORT_NAME_DESC,
+  SORT_POPULATION_ASC,
+  SORT_POPULATION_DESC,
+  EQUAL_COMPARE,
+  GREATER_THAN_COMPARE
+} from '../constants';
 
-const Filters = ({ onSortChange, selectedSort }) => {
-  // Toggle 'selected' class on sort by links
-  const selectedSortedClasses = sort => (selectedSort === sort ? 'dropdown-option selected' : 'dropdown-option');
-
+const Filters = ({
+  onSortChange,
+  selectedSort,
+  selectedRegionFilter,
+  availableSubregions,
+  onRegionFilterChange,
+  onLanguageFilterChange,
+  selectedLanguagesFilter
+}) => {
   return (
     <div className="filters">
-      <h3>Sort by:</h3>
+      <p className="filter-by-text">Sort by:</p>
 
       <div className="dropdown">
         <div className="dropdown-select">
@@ -16,23 +28,64 @@ const Filters = ({ onSortChange, selectedSort }) => {
         </div>
 
         <div className="dropdown-options">
-          <div className={selectedSortedClasses(SORT_NAME_ASC)} onClick={() => onSortChange(SORT_NAME_ASC)}>
+          <div className="dropdown-option" onClick={() => onSortChange(SORT_NAME_ASC)}>
             {SORT_NAME_ASC}
           </div>
 
-          <div className={selectedSortedClasses(SORT_NAME_DESC)} onClick={() => onSortChange(SORT_NAME_DESC)}>
+          <div className="dropdown-option" onClick={() => onSortChange(SORT_NAME_DESC)}>
             {SORT_NAME_DESC}
           </div>
 
-          <div className={selectedSortedClasses(SORT_POPULATION_ASC)} onClick={() => onSortChange(SORT_POPULATION_ASC)}>
+          <div className="dropdown-option" onClick={() => onSortChange(SORT_POPULATION_ASC)}>
             {SORT_POPULATION_ASC}
           </div>
 
-          <div
-            className={selectedSortedClasses(SORT_POPULATION_DESC)}
-            onClick={() => onSortChange(SORT_POPULATION_DESC)}
-          >
+          <div className="dropdown-option" onClick={() => onSortChange(SORT_POPULATION_DESC)}>
             {SORT_POPULATION_DESC}
+          </div>
+        </div>
+      </div>
+
+      <br />
+
+      <p className="filter-by-text">Subregion</p>
+
+      <div className="dropdown">
+        <div className="dropdown-select">
+          <span>{selectedRegionFilter || 'Select'}</span> <span className="dropdown-icon">&#x25BC;</span>
+        </div>
+
+        <div className="dropdown-options">
+          {availableSubregions.map(region => {
+            return (
+              <div className="dropdown-option" onClick={() => onRegionFilterChange(region)} key={region}>
+                {region}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      <br />
+
+      <p className="filter-by-text">Languages</p>
+
+      <div className="dropdown">
+        <div className="dropdown-select">
+          <span>{selectedLanguagesFilter || 'Select'}</span> <span className="dropdown-icon">&#x25BC;</span>
+        </div>
+
+        <div className="dropdown-options">
+          <div className="dropdown-option" onClick={() => onLanguageFilterChange(EQUAL_COMPARE, '1')}>
+            1
+          </div>
+
+          <div className="dropdown-option" onClick={() => onLanguageFilterChange(EQUAL_COMPARE, '2')}>
+            2
+          </div>
+
+          <div className="dropdown-option" onClick={() => onLanguageFilterChange(GREATER_THAN_COMPARE, '3+')}>
+            3+
           </div>
         </div>
       </div>
@@ -42,11 +95,16 @@ const Filters = ({ onSortChange, selectedSort }) => {
 
 Filters.propTypes = {
   onSortChange: PropTypes.func.isRequired,
-  selectedSort: PropTypes.string
+  selectedSort: PropTypes.string,
+  onRegionFilterChange: PropTypes.func.isRequired,
+  selectedRegionFilter: PropTypes.string,
+  availableSubregions: PropTypes.array.isRequired,
+  onLanguageFilterChange: PropTypes.func.isRequired
 };
 
 Filters.defaultProps = {
-  selectedSort: null
+  selectedSort: null,
+  selectedRegionFilter: null
 };
 
 export default Filters;

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Country = props => {
-  // console.log(props.data);
   const { name, flag, subregion, capital, population, languages } = props.data;
 
   return (
