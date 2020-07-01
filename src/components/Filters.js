@@ -49,7 +49,7 @@ const Filters = ({
       </div>
 
       <div className="filter-container">
-        <p className="filter-by-text">Filter by Subregion</p>
+        <p className="filter-by-text">Filter by Subregion:</p>
 
         <div className="dropdown">
           <div className="dropdown-select">
@@ -69,7 +69,7 @@ const Filters = ({
       </div>
 
       <div className="filter-container">
-        <p className="filter-by-text">Filter by # Languages</p>
+        <p className="filter-by-text">Filter by # Languages:</p>
 
         <div className="dropdown">
           <div className="dropdown-select">
