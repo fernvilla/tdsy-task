@@ -1,8 +1,75 @@
+$color-gray: #cccccc;
+
 body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
+  background-color: #f2f2f2;
 }
 
+// Main layout
+
+.main-section {
+  display: flex;
+}
+
+.loader {
+  display: flex;
+  justify-content: center;
+  margin: 2em;
+}
+
+// Filters
+.filters {
+  flex: 0 0 200px;
+  padding: 3em 2em;
+  background-color: #fff;
+  min-height: 100vh;
+  border-right: 1px solid $color-gray;
+
+  .dropdown-select {
+    background-color: #5b7584;
+    color: #ffffff;
+    cursor: pointer;
+    transition: opacity 0.5s ease;
+    padding: 0.65em 0.75em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:hover ~ .dropdown-options {
+      display: block;
+    }
+  }
+
+  .dropdown-icon {
+    font-size: 10px;
+  }
+
+  .dropdown-options {
+    cursor: pointer;
+    display: none;
+    border: 1px solid $color-gray;
+
+    &:hover {
+      display: block;
+    }
+  }
+
+  .dropdown-option {
+    padding: 0.65em 0.75em;
+
+    &:hover {
+      background-color: #4d535e;
+      color: #ffffff;
+    }
+  }
+}
+
+// Countries
 .countries-container {
   padding: 3em 1em;
   display: flex;
@@ -24,7 +91,7 @@ body {
     }
 
     .country-card {
-      margin: 1em;
+      margin: 1.25em;
       background-color: #fff;
       border-radius: 5px;
       box-shadow: rgba(34, 36, 38, 0.15) 0px 1px 2px 0px;
@@ -35,7 +102,7 @@ body {
         height: 200px;
         object-fit: cover;
         width: 100%;
-        border-bottom: 1px solid #cccccc;
+        border-bottom: 1px solid $color-gray;
       }
 
       .card-info {

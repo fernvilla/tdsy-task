@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Country = props => {
-  console.log(props.data);
+  // console.log(props.data);
   const { name, flag, subregion, capital, population, languages } = props.data;
 
   return (
     <div className="country-card-wrapper">
       <div className="country-card">
-        <img className="country-img" src={flag} alt={name} title={name} height />
+        <img className="country-img" src={flag} alt={name} title={name} />
 
         <div className="card-info">
           <div>
@@ -21,7 +21,7 @@ const Country = props => {
             <strong>Capital:</strong> {capital}
           </div>
           <div>
-            <strong>Total population:</strong> {population}
+            <strong>Total population:</strong> {population.toLocaleString()}
           </div>
           <div>
             <strong>Languages:</strong> {languages.length}
