@@ -28,7 +28,7 @@ const App = () => {
         const res = await fetch('https://restcountries.eu/rest/v2/region/europe');
         const data = await res.json();
 
-        console.log('countries', data);
+        // console.log('countries', JSON.stringify(data));
 
         setCountries(data);
         setRenderedCountries(data);
@@ -45,13 +45,37 @@ const App = () => {
 
   const mapSubregionsToArary = data => {
     //Create unique list of regions for filtering
-    const subregions = data.reduce((regions, country) => {
+
+    // OLD
+    const t1 = performance.now();
+
+    data.reduce((regions, country) => {
       if (regions.includes(country.subregion)) return regions;
 
       regions.push(country.subregion);
 
       return regions;
     }, []);
+    const t2 = performance.now();
+
+    console.log(`Call to reduce took ${t2 - t1} milliseconds.`);
+
+    // NEW
+    const t3 = performance.now();
+    const map = {}; //Use to track if region found (skips needing to do second iteration)
+    const subregions = []; //If found, add to this array
+
+    for (let { subregion } of data) {
+      //if already exists, skip
+      if (map[subregion]) continue;
+
+      // else, track in map object, add to array for the state
+      map[subregion] = true;
+      subregions.push(subregion);
+    }
+    const t4 = performance.now();
+
+    console.log(`Call to map/array took ${t4 - t3} milliseconds.`);
 
     setAvailableSubregions(subregions);
   };
